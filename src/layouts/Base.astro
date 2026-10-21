@@ -1,0 +1,6 @@
+---
+import '../styles/global.css';
+const { title = 'ProfOps — Engineering Magazine + Lab', description = 'Real-world engineering insights, cloud-native systems and hands-on labs.' } = Astro.props;
+const nav = [{href:'/',label:'Home'},{href:'/insights',label:'Insights'},{href:'/labs',label:'Labs'},{href:'/ai-ops',label:'AI & Ops'},{href:'/about',label:'About'}];
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="description" content={description}/><link rel="icon" href="/favicon.svg"/><title>{title}</title></head><body><header class="header"><div class="shell nav"><a class="logo" href="/">&lt;<span>ProfOps</span><em>.dev</em>/&gt;</a><nav aria-label="Main navigation">{nav.map(item=><a class={Astro.url.pathname===item.href?'active':''} href={item.href}>{item.label}</a>)}</nav><a class="github" href="https://github.com/profops" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></header><main><slot/></main><footer><div class="shell footer"><span>© {new Date().getFullYear()} ProfOps · Built for curious engineers.</span><span>Engineering Magazine + Lab · <a href="https://github.com/profops">GitHub ↗</a></span></div></footer></body></html>
