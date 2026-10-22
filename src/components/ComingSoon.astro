@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  lang?: 'en' | 'tr';
+}
+
+const {
+  title,
+  description,
+  lang = 'en'
+} = Astro.props;
+---
+
+<section class="page coming-soon-page">
+  <div class="shell coming-soon-content">
+    <span class="eyebrow">
+      {lang === 'tr' ? 'ÇOK YAKINDA' : 'COMING SOON'}
+    </span>
+
+    <h1>
+      {title}
+      <span class="gradient">
+        {lang === 'tr' ? ' Çok Yakında.' : ' Coming Soon.'}
+      </span>
+    </h1>
+
+    <p class="lead">{description}</p>
+
+    <div class="actions">
+      <a class="button" href={lang === 'tr' ? '/tr/' : '/'}>
+        {lang === 'tr' ? 'Ana Sayfaya Dön →' : 'Back to Home →'}
+      </a>
+
+      <a class="button secondary" href={lang === 'tr' ? '/tr/about' : '/about'}>
+        {lang === 'tr' ? 'ProfOps Hakkında' : 'About ProfOps'}
+      </a>
+    </div>
+  </div>
+</section>
