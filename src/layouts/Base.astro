@@ -1,6 +1,130 @@
 ---
 import '../styles/global.css';
-const { title = 'ProfOps — Engineering Magazine + Lab', description = 'Real-world engineering insights, cloud-native systems and hands-on labs.' } = Astro.props;
-const nav = [{href:'/',label:'Home'},{href:'/insights',label:'Insights'},{href:'/labs',label:'Labs'},{href:'/ai-ops',label:'AI & Ops'},{href:'/about',label:'About'}];
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'en' | 'tr' | 'nl';
+}
+
+const {
+  title = 'ProfOps — Engineering Magazine + Lab',
+  description = 'Real-world engineering insights, cloud-native systems and hands-on labs.',
+  lang = 'en'
+} = Astro.props;
+
+const translations = {
+  en: {
+    home: 'Home',
+    insights: 'Insights',
+    labs: 'Labs',
+    aiOps: 'AI & Ops',
+    about: 'About',
+    footer: 'Built for curious engineers.'
+  },
+  tr: {
+    home: 'Ana Sayfa',
+    insights: 'Yazılar',
+    labs: 'Laboratuvar',
+    aiOps: 'AI & Ops',
+    about: 'Hakkımızda',
+    footer: 'Meraklı mühendisler için.'
+  },
+  nl: {
+    home: 'Home',
+    insights: 'Artikelen',
+    labs: 'Labs',
+    aiOps: 'AI & Ops',
+    about: 'Over ons',
+    footer: 'Voor nieuwsgierige engineers.'
+  }
+};
+
+const t = translations[lang];
+const prefix = lang === 'en' ? '' : `/${lang}`;
+
+const nav = [
+  { href: `${prefix}/`, label: t.home },
+  { href: `${prefix}/insights`, label: t.insights },
+  { href: `${prefix}/labs`, label: t.labs },
+  { href: `${prefix}/ai-ops`, label: t.aiOps },
+  { href: `${prefix}/about`, label: t.about }
+];
+
+const currentPath = Astro.url.pathname;
+const pagePath = currentPath.replace(/^\/(tr|nl)(?=\/|$)/, '') || '/';
+
+const languageLinks = [
+  { code: 'EN', href: pagePath },
+  { code: 'TR', href: `/tr${pagePath}` },
+  { code: 'NL', href: `/nl${pagePath}` }
+];
 ---
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="description" content={description}/><link rel="icon" href="/favicon.svg"/><title>{title}</title></head><body><header class="header"><div class="shell nav"><a class="logo" href="/">&lt;<span>ProfOps</span><em>.dev</em>/&gt;</a><nav aria-label="Main navigation">{nav.map(item=><a class={Astro.url.pathname===item.href?'active':''} href={item.href}>{item.label}</a>)}</nav><a class="github" href="https://github.com/profops" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></header><main><slot/></main><footer><div class="shell footer"><span>© {new Date().getFullYear()} ProfOps · Built for curious engineers.</span><span>Engineering Magazine + Lab · <a href="https://github.com/profops">GitHub ↗</a></span></div></footer></body></html>
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="shell nav">
+        <a class="logo" href="/">
+          &lt;<span>ProfOps</span><em>.dev</em>/&gt;
+        </a>
+
+        <nav aria-label="Main navigation">
+          {nav.map(item => (
+            <a
+              class={currentPath.replace(/\/$/, '') === item.href.replace(/\/$/, '') ? 'active' : ''}
+              href={item.href}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div class="nav-actions">
+          <div class="language-switcher" aria-label="Language">
+            {languageLinks.filter(item => item.code !== 'NL').map(item => (
+              <a
+                href={item.href}
+                class={item.code.toLowerCase() === lang ? 'active' : ''}
+                aria-current={item.code.toLowerCase() === lang ? 'page' : undefined}
+              >
+                {item.code}
+              </a>
+            ))}
+          </div>
+
+          <a
+            class="github"
+            href="https://github.com/profops"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <div class="shell footer">
+        <span>© {new Date().getFullYear()} ProfOps · {t.footer}</span>
+        <span>
+          Engineering Magazine + Lab ·
+          <a href="https://github.com/profops">GitHub ↗</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>
