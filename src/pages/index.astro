@@ -1,17 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const title = 'ProfOps.dev — Coming Soon';
+const title = 'Welcome to ProfOps.dev — Let’s Explore Together';
 ---
 
 <Base
   title={title}
-  description="ProfOps — an engineering magazine and hands-on lab for DevOps, Platform Engineering, Cloud Native, SRE and AI. Launching soon."
+  description="Explore real-world engineering insights, hands-on labs and shared experiences in DevOps, Platform Engineering, Cloud Native, SRE and AI."
   lang="en"
 >
   <section class="home-coming-soon">
     <div class="home-coming-soon-inner">
 
+      <!-- Brand -->
       <div class="home-brand">
         <span class="home-mark" aria-hidden="true">&gt;_</span>
         <span>
@@ -19,22 +20,40 @@ const title = 'ProfOps.dev — Coming Soon';
         </span>
       </div>
 
-      <div class="home-coming-pill">COMING SOON</div>
-
-      <h1>
-        Something great is
-        <span class="purple">in the making.</span>
-      </h1>
-
-      <p class="home-lead">
-        A new space for real-world engineering insights,
-        cloud-native architectures and hands-on labs.
-      </p>
-
-      <div class="home-tagline">
-        Engineering the future. Launching soon. ↗
+      <!-- Welcome label -->
+      <div class="home-coming-pill">
+        ENGINEERING · COMMUNITY · EXPLORATION
       </div>
 
+      <!-- Main heading -->
+      <h1>
+        Welcome to
+        <span class="purple">ProfOps.dev</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <h2 class="home-welcome-subtitle">
+        Let's <span class="cyan">Explore Together.</span>
+      </h2>
+
+      <!-- Description -->
+      <p class="home-lead">
+        A space for real-world engineering insights,
+        hands-on labs, and shared experiences.
+      </p>
+
+      <!-- Action buttons -->
+      <div class="home-actions">
+        <a href="/about" class="home-btn home-btn-primary">
+          Explore ProfOps →
+        </a>
+
+        <a href="/about" class="home-btn home-btn-secondary">
+          Share an Idea ↗
+        </a>
+      </div>
+
+      <!-- Topics -->
       <div class="home-topics">
         <span>DevOps</span>
         <span>Platform Engineering</span>
@@ -43,6 +62,13 @@ const title = 'ProfOps.dev — Coming Soon';
         <span>AI &amp; Automation</span>
       </div>
 
+      <!-- Upcoming content -->
+      <div class="home-upcoming">
+        <span>🛠️</span>
+        Technical articles and hands-on labs are coming soon!
+      </div>
+
+      <!-- Footer note -->
       <div class="home-bottom">
         Built by engineers, for engineers. ·
         © {new Date().getFullYear()} ProfOps

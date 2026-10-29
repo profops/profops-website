@@ -1,99 +1,73 @@
 ---
 import Base from '../../layouts/Base.astro';
+
+const title = "ProfOps.dev'e Hoş Geldiniz — Birlikte Keşfedelim";
 ---
 
 <Base
-  title="ProfOps | Mühendislik, Teknoloji ve Birlikte Öğrenme"
-  description="DevOps, Platform Engineering, Cloud Native, SRE ve yapay zekâ üzerine teknik yazılar, uygulamalı projeler ve mühendislik deneyimleri."
+  title={title}
+  description="DevOps, Platform Engineering, Cloud Native, SRE ve yapay zekâ üzerine gerçek mühendislik deneyimleri, teknik yazılar ve uygulamalı çalışmalar."
   lang="tr"
 >
-  <section class="hero">
-    <div class="shell">
-      <span class="eyebrow">PROFOPS · ENGINEERING MAGAZINE + LAB</span>
+  <section class="home-coming-soon">
+    <div class="home-coming-soon-inner">
 
+      <!-- Brand -->
+      <div class="home-brand">
+        <span class="home-mark" aria-hidden="true">&gt;_</span>
+        <span>
+          Prof<span class="purple">Ops</span><span class="cyan">.dev</span>
+        </span>
+      </div>
+
+      <!-- Welcome label -->
+      <div class="home-coming-pill">
+        MÜHENDİSLİK · TOPLULUK · KEŞİF
+      </div>
+
+      <!-- Main heading -->
       <h1>
-        Mühendisliği <span class="gradient">Birlikte Keşfedelim.</span>
+        ProfOps.dev'e
+        <span class="purple">Hoş Geldiniz!</span>
       </h1>
 
-      <p class="lead">
-        Gerçek mühendislik deneyimleri, teknik bilgiler,
-        uygulamalı projeler ve yeni teknolojiler.
-        Öğrendiklerimizi paylaşalım, merak ettiklerimizi
-        birlikte araştıralım.
+      <!-- Subtitle -->
+      <h2 class="home-welcome-subtitle">
+        Birlikte <span class="cyan">Keşfedelim.</span>
+      </h2>
+
+      <!-- Description -->
+      <p class="home-lead">
+        Gerçek mühendislik deneyimlerini, teknik bilgileri
+        ve uygulamalı çalışmaları paylaşabileceğimiz bir alan.
       </p>
 
-      <div class="actions">
-        <a class="button" href="/tr/about">
+      <!-- Action buttons -->
+      <div class="home-actions">
+        <a href="/tr/about" class="home-btn home-btn-primary">
           ProfOps'u Keşfet →
         </a>
-        <a class="button secondary" href="https://github.com/profops">
-          GitHub Projeleri ↗
+
+        <a href="/tr/about" class="home-btn home-btn-secondary">
+          Fikrini Paylaş ↗
         </a>
       </div>
 
-      <div class="pills">
-        <span class="pill">DevOps</span>
-        <span class="pill">Platform Engineering</span>
-        <span class="pill">Cloud Native</span>
-        <span class="pill">SRE</span>
-        <span class="pill">AI & Automation</span>
+      <!-- Topics -->
+      <div class="home-topics">
+        <span>DevOps</span>
+        <span>Platform Engineering</span>
+        <span>Cloud Native</span>
+        <span>SRE</span>
+        <span>AI &amp; Automation</span>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="shell">
-      <span class="eyebrow">KEŞFEDİN</span>
-      <h2>ProfOps'ta neler var?</h2>
-
-      <div class="grid">
-        <article class="card">
-          <span class="tag">YAZILAR</span>
-          <h3>Engineering Insights</h3>
-          <p>
-            Gerçek projelerden edinilen deneyimler,
-            teknik çözümler ve mühendislik bakış açıları.
-          </p>
-        </article>
-
-        <article class="card">
-          <span class="tag">LABORATUVAR</span>
-          <h3>Hands-on Labs</h3>
-          <p>
-            Kubernetes, otomasyon, GitOps ve
-            Cloud Native teknolojileriyle uygulamalı çalışmalar.
-          </p>
-        </article>
-
-        <article class="card">
-          <span class="tag">AI & OPS</span>
-          <h3>AI & Automation</h3>
-          <p>
-            Yapay zekânın mühendislik süreçlerine
-            etkisi, otomasyon ve yeni teknolojiler.
-          </p>
-        </article>
+      <!-- Upcoming content -->
+      <div class="home-upcoming">
+        <span>🛠️</span>
+        Teknik yazılar ve uygulamalı çalışmalar çok yakında!
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="shell">
-      <div class="feature">
-        <div>
-          <span class="eyebrow">BİRLİKTE ÖĞRENELİM</span>
-          <h2>Sen de ProfOps'un bir parçası ol.</h2>
-          <p class="muted">
-            Merak ettiğin bir konu mu var?
-            Deneyimlerini paylaşmak veya konuk yazar olmak mı istiyorsun?
-            Fikirleri birlikte keşfedebiliriz.
-          </p>
-        </div>
-
-        <a class="button" href="/tr/about">
-          Daha Fazla Bilgi →
-        </a>
-      </div>
     </div>
   </section>
 </Base>
