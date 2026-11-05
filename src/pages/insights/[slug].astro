@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('insights');
+  const englishArticles = articles.filter(
+    (article) => article.data.language === 'en' && !article.data.draft
+  );
+
+  return englishArticles.map((article) => {
+    const translation = articles.find(
+      (candidate) =>
+        candidate.data.translationKey === article.data.translationKey &&
+        candidate.data.language === 'tr' &&
+        !candidate.data.draft
+    );
+
+    return {
+      params: { slug: article.id },
+      props: {
+        article,
+        alternateLinks: {
+          en: `/insights/${article.id}/`,
+          tr: translation
+            ? `/tr/insights/${translation.id}/`
+            : '/tr/insights/',
+        },
+      },
+    };
+  });
+}
+
+const { article, alternateLinks } = Astro.props;
+const { Content, headings } = await render(article);
+---
+
+<ArticleLayout
+  title={article.data.title}
+  description={article.data.description}
+  author={article.data.author}
+  publishDate={article.data.publishDate}
+  readingTime={article.data.readingTime}
+  tags={article.data.tags}
+  language={article.data.language}
+  takeaways={article.data.takeaways}
+  alternateLinks={alternateLinks}
+  headings={headings}
+>
+  <Content />
+</ArticleLayout>

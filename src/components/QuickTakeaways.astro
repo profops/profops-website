@@ -1,0 +1,76 @@
+---
+interface Props {
+  items: string[];
+  lang?: 'en' | 'tr';
+}
+
+const { items = [], lang = 'en' } = Astro.props;
+---
+
+{items.length > 0 && (
+  <aside class="quick-takeaways" aria-label={lang === 'tr' ? 'Kısa özet' : 'Quick takeaways'}>
+    <div class="takeaways-heading">
+      <span class="takeaways-icon" aria-hidden="true">✦</span>
+      <div>
+        <h2>{lang === 'tr' ? 'Kısa Özet' : 'Quick Takeaways'}</h2>
+        <p>{lang === 'tr' ? '2 dakikada önemli noktalar' : 'The 2-minute read'}</p>
+      </div>
+    </div>
+
+    <ul>
+      {items.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </aside>
+)}
+
+<style>
+  .quick-takeaways {
+    margin: 32px 0;
+    padding: 28px;
+    background: linear-gradient(135deg, #171b31, #111827);
+    border: 1px solid #554582;
+    border-radius: 16px;
+  }
+
+  .takeaways-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .takeaways-icon {
+    color: #c4b5fd;
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    margin: 0;
+    color: #e9d5ff;
+    font-size: 1.2rem;
+  }
+
+  .takeaways-heading p {
+    margin: 5px 0 0;
+    color: #a5b4c8;
+    font-size: 0.88rem;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 22px;
+    color: #e2e8f0;
+  }
+
+  li {
+    margin: 10px 0;
+    line-height: 1.65;
+  }
+
+  li::marker {
+    color: #a78bfa;
+  }
+</style>

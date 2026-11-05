@@ -5,12 +5,17 @@ interface Props {
   title?: string;
   description?: string;
   lang?: 'en' | 'tr' | 'nl';
+  alternateLinks?: {
+    en: string;
+    tr: string;
+  };
 }
 
 const {
   title = 'ProfOps — Engineering Magazine + Lab',
   description = 'Real-world engineering insights, cloud-native systems and hands-on labs.',
-  lang = 'en'
+  lang = 'en',
+  alternateLinks
 } = Astro.props;
 
 const translations = {
@@ -55,8 +60,8 @@ const currentPath = Astro.url.pathname;
 const pagePath = currentPath.replace(/^\/(tr|nl)(?=\/|$)/, '') || '/';
 
 const languageLinks = [
-  { code: 'EN', href: pagePath },
-  { code: 'TR', href: `/tr${pagePath}` },
+  { code: 'EN', href: alternateLinks?.en ?? pagePath },
+  { code: 'TR', href: alternateLinks?.tr ?? `/tr${pagePath}` },
   { code: 'NL', href: `/nl${pagePath}` }
 ];
 ---
