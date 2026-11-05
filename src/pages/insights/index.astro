@@ -1,14 +1,103 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ComingSoon from '../../components/ComingSoon.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (
+  await getCollection(
+    'insights',
+    ({ data }) => data.language === 'en' && !data.draft
+  )
+).sort(
+  (a, b) =>
+    b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
 ---
 
 <Base
   title="Engineering Insights | ProfOps"
+  description="Real-world engineering experiences, technical insights, architecture decisions and lessons learned."
   lang="en"
 >
-  <ComingSoon
-    title="Engineering Insights"
-    description="Real-world engineering experiences, technical insights, architecture decisions and lessons learned. We're preparing something worth exploring."
-  />
+  <main class="insights-page">
+    <div class="insights-container">
+      <header class="insights-header">
+        <span class="eyebrow">PROFOPS ENGINEERING MAGAZINE</span>
+
+        <h1>Engineering Insights</h1>
+
+        <p>
+          Real-world engineering experiences, technical perspectives,
+          architecture decisions and lessons learned.
+        </p>
+      </header>
+
+      <section class="articles-grid" aria-label="Articles">
+        {articles.map((article) => (
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.description}
+            href={`/insights/${article.id}/`}
+            category={article.data.category}
+            author={article.data.author}
+            readingTime={article.data.readingTime}
+            publishDate={article.data.publishDate}
+            lang="en"
+          />
+        ))}
+      </section>
+    </div>
+  </main>
 </Base>
+
+<style>
+  .insights-page {
+    padding: 80px 24px 110px;
+  }
+
+  .insights-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .insights-header {
+    max-width: 760px;
+    margin-bottom: 55px;
+  }
+
+  .eyebrow {
+    color: #a78bfa;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .insights-header h1 {
+    color: #f9fafb;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    margin: 18px 0;
+  }
+
+  .insights-header p {
+    color: #9ca3af;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  @media (max-width: 700px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .insights-page {
+      padding: 45px 20px 70px;
+    }
+  }
+</style>
